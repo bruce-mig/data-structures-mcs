@@ -1,4 +1,4 @@
-// Linked List: Delete a node at nth position
+// Linked List: Delete a node at specified index position
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,10 +10,10 @@ typedef struct Node {
 
 Node *head; // global
 
-void insert_node(int data); // insert an integer at the end of the list
+void insert_node(int data); // insert an integer at the beginning of the list
 void print_list(); // print all elements in the list
-void delete_node(int pos); // delete node at position pos
-void free_mem();
+void delete_node(int pos); // delete node at index pos
+void free_list();
 
 int main(void) {
 
@@ -22,7 +22,7 @@ int main(void) {
     printf("How many numbers?\n");
     int n, i, x;
     scanf("%d", &n);
-    for (int i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) {
         printf("Enter the number: \n");
         scanf("%d",&x);
         insert_node(x);
@@ -30,68 +30,77 @@ int main(void) {
     print_list();
 
     int pos;
-    printf("Enter a position less than %d:\n", n);
+    printf("Enter index position between 0 and %d:\n", n-1);
     scanf("%d", &pos);
-    if (pos > n) {
-        perror("Invalid position");
+    if (pos >= n || pos < 0) {
+        perror("Invalid index position");
         return 1;
     }
 
     delete_node(pos);
     print_list();
 
-    free_mem();
+    free_list();
     return 0;
 }
 
-void insert_node(int x) {
-    Node *temp = malloc(sizeof(Node));
-    // if (temp == NULL) {
-    //     return 1;
-    // }
-    
-    temp->data = x;
-    temp->next = head;
-    head = temp;
+void insert_node(int data) {
+    Node *new_node = (Node *)malloc(sizeof(Node));
+    new_node->data = data;
+    new_node->next = NULL;
+
+    if (head == NULL) {
+        head = new_node;
+    } else {
+        Node *temp = head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = new_node;
+    }
 }
 
 void print_list() {
     Node *temp = head;
-    printf("List is: ");
-    while(temp != NULL) {
-        printf(" %d", temp->data);
+    printf("List is: [");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
         temp = temp->next;
     }
-    printf("\n");
+    printf("]\n");
 }
 
-// Function to prevent memory leak
-void free_mem() {
-    while (head != NULL) {
-        Node *tmp = head->next;
-        free(head);
-        head = tmp;
-    }
-}
-
-// deletes node at position n
-void delete_node(int n) {
-
-    Node *temp1 = head;
-    if (n ==1) {
-        head = temp1->next; // head now points to second node
-        free(temp1);
+void delete_node(int pos) {
+    if (head == NULL) {
         return;
     }
-    
-    int i;
-    for (i=0; i < n-2;i++){
-        temp1 = temp1->next;
+
+    Node *temp = head;
+
+    if (pos == 0) {
+        head = temp->next;
+        free(temp);
+        return;
     }
-    // temp1 points to (n-1)th Node
-    Node *temp2 = temp1->next; // nth Node
-    temp1->next = temp2->next; // (n+1)th Node
 
-    free(temp2); // delete temp2
+    for (int i = 0; temp != NULL && i < pos - 1; i++) {
+        temp = temp->next;
+    }
 
+    if (temp == NULL || temp->next == NULL) {
+        return;
+    }
+
+    Node *next = temp->next->next;
+    free(temp->next);
+    temp->next = next;
+}
+
+void free_list() {
+    Node *temp;
+    while (head != NULL) {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
 }
