@@ -1,5 +1,6 @@
 // Stack - Array based implementation
 #include <stdio.h>
+#include <stdbool.h>
 #define MAX_SIZE 101
 
 int A[MAX_SIZE];
@@ -8,6 +9,8 @@ int topVal = -1; // empty stack
 void push(int x);
 void pop();
 void print();
+int top();
+bool isEmpty(int topVal);
 
 int main() {
     push(2); print();
@@ -46,4 +49,12 @@ void print() {
         printf("%d ", A[i]);
     }
     printf("\n");
+}
+
+bool isEmpty(int topVal) {
+    if (topVal == -1) {
+        return true;
+    } else {
+        return false;
+    }
 }
