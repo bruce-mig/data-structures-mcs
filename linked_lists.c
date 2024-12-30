@@ -63,9 +63,10 @@ void print_list() {
 
 // Function to prevent memory leak
 void free_mem() {
+    Node *temp;
     while (head != NULL) {
-        Node *tmp = head->next;
-        free(head);
-        head = tmp;
+        temp = head;
+        head = head->next;
+        free(temp);
     }
 }

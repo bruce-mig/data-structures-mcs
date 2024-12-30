@@ -32,9 +32,6 @@ int main(void) {
 
 void insert_node(int x) {
     Node *temp = malloc(sizeof(Node));
-    // if (temp == NULL) {
-    //     return 1;
-    // }
     
     temp->data = x;
     temp->next = head;
@@ -53,9 +50,10 @@ void print_list() {
 
 // Function to prevent memory leak
 void free_mem() {
+    Node *temp;
     while (head != NULL) {
-        Node *tmp = head->next;
-        free(head);
-        head = tmp;
+        temp = head;
+        head = head->next;
+        free(temp);
     }
 }
