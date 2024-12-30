@@ -1,4 +1,4 @@
-## Stack Abstract Data Type
+## Stack Abstract Data Type (LIFO)
 
 #### Definition
 
