@@ -1,5 +1,5 @@
 /* Doubly Linked List Implementation 
-Insert at Head or Insert at Tail
+   Insert at Head or Insert at Tail
 */
 #include <stdio.h>
 #include <stdlib.h>
