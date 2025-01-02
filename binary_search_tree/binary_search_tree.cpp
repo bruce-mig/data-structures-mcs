@@ -1,4 +1,5 @@
-// Binary Search Tree -Implementation in C++
+// Binary Search Tree - Implemenation in C++
+// Simple program to create a BST of integers and search an element in it 
 #include <iostream>
 using namespace std;
 
@@ -32,9 +33,11 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
+// To insert data in BST, returns address of root node 
 BstNode* insert(BstNode *root,int data) {
     if (root== NULL) {
         root = getNewNode(data);
+        return root;
     } else if (data <= root->data) {
         root->left = insert(root->left, data);
     } else {
@@ -44,6 +47,7 @@ BstNode* insert(BstNode *root,int data) {
 
 }
 
+//To search an element in BST, returns true if element is found
 bool search(BstNode *root, int data) {
     if(root == NULL) return false;
     else if(root->data == data) return true;
@@ -52,6 +56,7 @@ bool search(BstNode *root, int data) {
 
 }
 
+// Function to create a new Node in heap
 BstNode* getNewNode(int data) {
     BstNode *newNode = new BstNode();
     newNode->data = data;
