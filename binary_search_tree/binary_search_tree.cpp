@@ -12,6 +12,7 @@ struct BstNode {
 BstNode* getNewNode(int data);
 BstNode* insert(BstNode *root,int data);
 bool search(BstNode *root, int data);
+void freeMem(BstNode *root);
 
 int main(int argc, char *argv[]) {
     BstNode *root = NULL; //creating an empty tree
@@ -27,6 +28,8 @@ int main(int argc, char *argv[]) {
     if(search(root, number) == true) cout<<"Found\n";
     else cout<<"Not Found\n";
 
+    freeMem(root);
+    return 0;
 }
 
 BstNode* insert(BstNode *root,int data) {
@@ -54,4 +57,12 @@ BstNode* getNewNode(int data) {
     newNode->data = data;
     newNode->left = newNode->right = NULL;
     return newNode;
+}
+
+// Function to free the memory allocated to the tree to avoid memory leak
+void freeMem(BstNode* root) {
+    if (root == NULL) return; // Base case: if the node is NULL, return
+    freeMem(root->left);      // Recursively free the left subtree
+    freeMem(root->right);     // Recursively free the right subtree
+    delete root;              // Free the current node
 }
