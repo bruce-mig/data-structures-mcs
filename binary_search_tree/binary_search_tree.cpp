@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
     for (int i = 1; i < argc; i++) {
         int number = atoi(argv[i]);
-        insert(root,number);
+        root = insert(root,number);
     }
 
     int number;
