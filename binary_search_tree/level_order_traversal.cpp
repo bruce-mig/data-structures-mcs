@@ -16,23 +16,30 @@ int findHeight(Node *root);
 void levelOrder(Node *root);
 void freeMem(Node *root);
 
-int main(int argc, char *argv[]) {
-    Node *root = NULL; //creating an empty tree
+int main() {
+    /*Code To Test the logic
+	  Creating an example tree
+	            M
+			   / \
+			  B   Q
+			 / \   \
+			A   C   Z
+    */
+    Node* root = NULL;
+	root = insert(root,'M'); root = insert(root,'B');
+	root = insert(root,'Q'); root = insert(root,'Z'); 
+	root = insert(root,'A'); root = insert(root,'C');
 
-    for (int i = 1; i < argc; i++) {
-        root = insert(root, *argv[i]);
-    }
-
-    char a;
-    cout<<"Enter character to be searched\n";
-    cin>>a;
-    if(search(root, a) == true) cout<<"Found\n";
-    else cout<<"Not Found\n";
+	// Perform level order traversal
+    cout << "Level Order Traversal: ";
+	levelOrder(root);
+    cout << '\n';
 
     freeMem(root);
     return 0;
 }
 
+// Function to print Nodes in a binary tree in Level order
 void levelOrder(Node *root) {
     if (root == NULL) return;
     queue<Node*> Q;
@@ -40,11 +47,10 @@ void levelOrder(Node *root) {
     // while there is at leat one discovered node
     while(!Q.empty()) {
         Node* current = Q.front();
+        Q.pop(); // remove the element at front
         cout<<current->data<<" ";
         if (current->left != NULL) Q.push(current->left);
         if (current->right != NULL) Q.push(current->right);
-        Q.pop(); // remove the element at front
-
     }
 
 }
