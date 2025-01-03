@@ -13,6 +13,7 @@ struct BstNode {
 BstNode* getNewNode(int data);
 BstNode* insert(BstNode *root,int data);
 bool search(BstNode *root, int data);
+int findHeight(BstNode *root);
 void freeMem(BstNode *root);
 
 int main(int argc, char *argv[]) {
@@ -62,6 +63,12 @@ BstNode* getNewNode(int data) {
     newNode->data = data;
     newNode->left = newNode->right = NULL;
     return newNode;
+}
+
+int findHeight(BstNode *root) {
+    if(root == NULL)
+        return -1;
+    return max(findHeight(root->left),findHeight(root->right)) + 1;
 }
 
 // Function to free the memory allocated to the tree to avoid memory leak
