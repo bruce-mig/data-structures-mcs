@@ -1,4 +1,4 @@
-/* Binary Tree - Level Order Traversal */
+/* Binary Tree - Breadth First Traversal */
 #include <iostream>
 #include <queue>
 using namespace std;
