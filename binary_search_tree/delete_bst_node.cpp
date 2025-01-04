@@ -84,8 +84,8 @@ Node* deleteNode(Node* root, int data) {
             root->data = temp->data;
             root->right = deleteNode(root->right, temp->data);
         }
-        return root;
     }
+    return root;
 }
 
 //To search an element in BST, returns true if element is found
