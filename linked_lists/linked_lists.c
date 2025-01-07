@@ -33,7 +33,7 @@ int main(void) {
 }
 
 void insert_node(int data, int pos) {
-    Node *n = malloc(sizeof(Node));
+    Node *n = (Node *)malloc(sizeof(Node));
     
     n->data = data;
     n->next = NULL;
